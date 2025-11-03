@@ -44,17 +44,16 @@ This stack is chosen to prioritize development speed, scalability, and alignment
 
 | Component | Technology | Justification |
 | :--- | :--- | :--- |
-| **Frontend** | React (with Vite) | A popular and robust library for building single-page applications. Vite provides a fast development experience. |
-| **Backend** | Python & Flask | Python is the industry standard for machine learning. Flask is a lightweight framework suitable for creating a simple API endpoint. |
-| **Backend** | Python & Flask | Python is the industry standard for machine learning and data transformation. Flask is a lightweight framework suitable for creating the API facade. |
+| **Frontend** | Vanilla JavaScript | A lightweight approach using native browser APIs, avoiding framework overhead for a simple user interface. |
+| **Backend** | Node.js & Express | A popular and efficient JavaScript runtime, suitable for creating a simple, non-blocking API server to handle image uploads and proxy requests. |
 | **ML Model** | **External Azure ML Endpoint** | The core emotion detection is handled by a pre-existing, high-accuracy Azure ML endpoint. Our backend's role is to act as a secure proxy to this service. This fulfills requirement **BE-2**. |
 | **Infrastructure**| Serverless Functions (e.g., AWS Lambda) | A serverless approach is ideal for an API facade. It is highly cost-effective, scalable, and eliminates server management overhead. The function will handle the base64 encoding and the external API call. |
 | **API Gateway** | AWS API Gateway (or equivalent) | Provides a secure, managed entry point for our API, handling request routing, throttling, and security. |
 
 ## 4. Data Flow
 
-1.  **Image Upload:** The user selects an image via the React frontend. The client sends a `POST` request with `multipart/form-data` to our API Gateway endpoint (**BE-1**).
-2.  **Backend Processing:** The API Gateway triggers the Python serverless function.
+1.  **Image Upload:** The user selects an image via the vanilla JavaScript frontend. The client sends a `POST` request with `multipart/form-data` to our backend server endpoint (**BE-1**).
+2.  **Backend Processing:** The Node.js server, using the Express framework, receives the request.
 3.  **Data Transformation:** The function receives the image, converts it to a base64-encoded string, and constructs a JSON payload.
 4.  **External API Call:** The function sends a `POST` request to the Azure ML endpoint, including the API key in the `Authorization` header.
 5.  **Response Handling:** The function receives the JSON response from the Azure ML service. It then transforms this response into the format required by the frontend (**BE-4**).
