@@ -1,0 +1,1 @@
+I want to build an app where a user can upload a picture. That picture will be processed by an azure machine learning endpoint. The endpoint details can be found in the README.md file in the Development folder. Create the app following the architecture document titled 'technical_architecture.md' in the Development folder
