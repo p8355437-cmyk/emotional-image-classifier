@@ -3,3 +3,4 @@ I want to build an app where a user can upload a picture. That picture will be p
 - When a picture is uploaded show a preview so the user can see what they uploaded
 - When you create the backend create it in the same folder as the frontend so when we load the resources they are in the same folder
 - The response you receive from the azure endpoint is a json string so parse it using JSON.parse
+- When performing a fetch from the backend, disable ssl verification
